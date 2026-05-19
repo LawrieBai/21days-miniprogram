@@ -1,0 +1,85 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  padding: 40rpx;
+}
+
+.ending-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 32rpx;
+  padding: 60rpx 40rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.1);
+}
+
+.companion-avatar {
+  font-size: 120rpx;
+  margin-bottom: 40rpx;
+}
+
+.final-intimacy {
+  margin-bottom: 40rpx;
+}
+
+.intimacy-label {
+  display: block;
+  font-size: 28rpx;
+  color: #e74c3c;
+  margin-bottom: 10rpx;
+}
+
+.intimacy-value {
+  font-size: 72rpx;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.farewell-poem {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 40rpx;
+}
+
+.poem-line {
+  font-size: 32rpx;
+  color: #555;
+  line-height: 1.8;
+}
+
+.question {
+  font-size: 36rpx;
+  color: #667eea;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+.message-input {
+  width: 100%;
+  height: 200rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 30rpx 80rpx;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  border: none;
+  margin-bottom: 30rpx;
+}
+
+.restart-btn {
+  background: rgba(255,255,255,0.5);
+  color: #666;
+  padding: 20rpx 60rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  border: 2rpx solid #ddd;
+}

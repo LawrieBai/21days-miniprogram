@@ -1,0 +1,12 @@
+<view class="container">
+  <!-- 封面页 -->
+  <view class="cover-page">
+    <view class="title">21天</view>
+    <view class="subtitle">陪伴养成游戏</view>
+    <view class="desc">用21天，养成一个陪伴的习惯</view>
+    
+    <button class="start-btn" bindtap="startGame">开始旅程</button>
+    
+    <view class="tips" bindtap="showTips">💡 温馨提示</view>
+  </view>
+</view>

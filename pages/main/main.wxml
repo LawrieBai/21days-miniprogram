@@ -1,0 +1,83 @@
+<view class="container">
+  <!-- 设置流程 -->
+  <block wx:if="{{isSetup}}">
+    <view class="setup-container">
+      <view class="step-title">{{setupSteps[currentStep].title}}</view>
+      
+      <!-- 步骤1: 选择玩家性别 -->
+      <block wx:if="{{currentStep === 0}}">
+        <view class="gender-select">
+          <view class="gender-option {{playerGender === 'male' ? 'selected' : ''}}" bindtap="selectPlayerGender" data-gender="male">
+            <text class="gender-icon">🧑</text>
+            <text>男生</text>
+          </view>
+          <view class="gender-option {{playerGender === 'female' ? 'selected' : ''}}" bindtap="selectPlayerGender" data-gender="female">
+            <text class="gender-icon">👩</text>
+            <text>女生</text>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 步骤2: 选择伴侣性别 -->
+      <block wx:if="{{currentStep === 1}}">
+        <view class="gender-select">
+          <view class="gender-option {{companionGender === 'male' ? 'selected' : ''}}" bindtap="selectCompanionGender" data-gender="male">
+            <text class="gender-icon">🧑</text>
+            <text>男生</text>
+          </view>
+          <view class="gender-option {{companionGender === 'female' ? 'selected' : ''}}" bindtap="selectCompanionGender" data-gender="female">
+            <text class="gender-icon">👩</text>
+            <text>女生</text>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 步骤3: 输入名字 -->
+      <block wx:if="{{currentStep === 2}}">
+        <input class="name-input" placeholder="输入我的名字" value="{{playerName}}" bindinput="onNameInput" />
+      </block>
+      
+      <view class="setup-buttons">
+        <button wx:if="{{currentStep > 0}}" class="btn-secondary" bindtap="prevStep">上一步</button>
+        <button class="btn-primary" bindtap="nextStep" disabled="{{!canProceed}}">{{currentStep === 2 ? '开始旅程' : '下一步'}}</button>
+      </view>
+    </view>
+  </block>
+  
+  <!-- 主游戏界面 -->
+  <block wx:else>
+    <view class="main-container">
+      <!-- 顶部信息 -->
+      <view class="header">
+        <view class="day-info">第 {{currentDay}} 天 / 共21天</view>
+        <view class="intimacy">亲密度: {{intimacy}}</view>
+      </view>
+      
+      <!-- 伴侣形象 -->
+      <view class="companion-area">
+        <view class="companion-avatar">{{companionGender === 'male' ? '🧑' : '👩'}}</view>
+        <view class="companion-name">{{companionName}}</view>
+      </view>
+      
+      <!-- 聊天区域 -->
+      <scroll-view class="chat-area" scroll-y="true" scroll-into-view="{{lastMessageId}}">
+        <view wx:for="{{chatHistory}}" wx:key="index" id="msg-{{index}}" class="message {{item.role}}">
+          <view class="message-content">{{item.text}}</view>
+        </view>
+        <view wx:if="{{isTyping}}" class="typing-indicator">对方正在输入...</view>
+      </scroll-view>
+      
+      <!-- 输入区域 -->
+      <view class="input-area">
+        <input class="chat-input" placeholder="和我说点什么..." value="{{inputText}}" bindinput="onInput" confirm-type="send" bindconfirm="sendMessage" />
+        <button class="send-btn" bindtap="sendMessage" disabled="{{!inputText || isTyping}}">发送</button>
+      </view>
+      
+      <!-- 底部操作 -->
+      <view class="actions">
+        <button class="action-btn" bindtap="giveGift">🎁 赠送礼物</button>
+        <button wx:if="{{currentDay >= 21}}" class="action-btn end-btn" bindtap="goToEnding">查看结局</button>
+      </view>
+    </view>
+  </block>
+</view>

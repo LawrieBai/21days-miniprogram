@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="ending-card">
+    <view class="companion-avatar">{{companionGender === 'male' ? '🧑' : '👩'}}</view>
+    
+    <view class="final-intimacy">
+      <text class="intimacy-label">最终亲密度</text>
+      <text class="intimacy-value">{{intimacy}}</text>
+    </view>
+    
+    <view class="farewell-poem">
+      <view class="poem-line">感谢你21天的陪伴</view>
+      <view class="poem-line">这是我一生中，过的最快乐的21天</view>
+      <view class="poem-line">愿你安好，所遇皆坦途，所期皆如愿</view>
+    </view>
+    
+    <view class="question">你，有什么想对我说的么？</view>
+    
+    <textarea 
+      class="message-input" 
+      placeholder="留下你想对我说的话...（500字以内）"
+      maxlength="500"
+      value="{{userMessage}}"
+      bindinput="onMessageInput"
+    />
+    
+    <button class="submit-btn" bindtap="submitMessage">提交留言</button>
+    
+    <button class="restart-btn" bindtap="restartGame">重新开始</button>
+  </view>
+</view>

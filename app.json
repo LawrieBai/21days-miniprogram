@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/main/main",
+    "pages/ending/ending"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ff9a9e",
+    "navigationBarTitleText": "21天陪伴",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#ff9a9e"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
