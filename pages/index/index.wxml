@@ -1,4 +1,4 @@
-<!-- 封面页 -->
+<!-- ==================== 开场动画页 ==================== -->
 <view class="container" wx:if="{{step === 0}}">
   <!-- 粒子动画 -->
   <view class="particles">
@@ -6,59 +6,115 @@
       style="left: {{item.x}}%; top: {{item.y}}%; width: {{item.size}}rpx; height: {{item.size}}rpx; opacity: {{item.opacity}}; animation-duration: {{item.duration}}s; animation-delay: {{item.delay}}s;">
     </view>
   </view>
+  
+  <!-- 语言切换按钮 -->
+  <view class="lang-btn" bindtap="toggleLanguage">
+    {{currentLang === 'zh' ? '中/EN' : 'EN/中'}}
+  </view>
+  
   <view class="cover-content">
     <view class="cover-icon">💕</view>
     <text class="cover-title">21天</text>
-    <text class="cover-subtitle">陪伴养成游戏</text>
-    <text class="cover-desc">用21天的时间，培养一段美好的陪伴关系</text>
-    <button class="btn-start" bindtap="goToStep1">开始旅程</button>
+    <text class="cover-subtitle">{{i18n.subtitle}}</text>
+    
+    <!-- 开场文字区域 -->
+    <view class="text-area">
+      <view class="intro-text-container">
+        <text class="intro-text-line">{{introLine1}}</text>
+        <text class="intro-text-line">{{introLine2}}</text>
+        <text class="intro-text-line">{{introLine3}}</text>
+      </view>
+      <text class="cursor" wx:if="{{showCursor}}">|</text>
+    </view>
+    
+    <!-- 按钮区域 -->
+    <view class="intro-actions">
+      <button class="btn-skip" wx:if="{{showSkipBtn && !showStartBtn}}" bindtap="skipIntro">{{i18n.skip}}</button>
+      <button class="btn-start" wx:if="{{showStartBtn}}" bindtap="goToStep1">{{i18n.start}}</button>
+    </view>
+    
+    <!-- 温馨提示按钮 -->
+    <button class="btn-tips" bindtap="showTips">💡 {{i18n.tips_title}}</button>
   </view>
 </view>
 
-<!-- 步骤1：选择玩家性别 -->
+<!-- ==================== 温馨提示弹窗 ==================== -->
+<view class="tips-modal" wx:if="{{showTipsModal}}">
+  <view class="tips-overlay" bindtap="closeTips"></view>
+  <view class="tips-content">
+    <view class="tips-header">
+      <text class="tips-icon">💡</text>
+      <text class="tips-title">{{i18n.tips_title}}</text>
+    </view>
+    <view class="tips-body">
+      <view class="tip-item tip-danger">
+        <text class="tip-num">1.</text>
+        <text class="tip-text">{{i18n.tips_1}}</text>
+      </view>
+      <view class="tip-item tip-success">
+        <text class="tip-num">2.</text>
+        <text class="tip-text">{{i18n.tips_2}}</text>
+      </view>
+      <view class="tip-item tip-info">
+        <text class="tip-num">3.</text>
+        <text class="tip-text">{{i18n.tips_3}}</text>
+      </view>
+    </view>
+    <button class="btn-tips-confirm" bindtap="closeTips">{{i18n.tips_confirm}}</button>
+  </view>
+</view>
+
+<!-- ==================== 步骤1：选择玩家性别 ==================== -->
 <view class="container step-page" wx:if="{{step === 1}}">
   <view class="step-header">
     <text class="step-indicator">1 / 4</text>
-    <text class="step-title">选择你的性别</text>
+    <text class="step-title">{{i18n.step0_title}}</text>
+    <text class="step-desc">{{i18n.step0_desc}}</text>
   </view>
+  
   <view class="card-group">
     <view class="gender-card {{playerGender === 'male' ? 'selected' : ''}}" bindtap="selectPlayerGender" data-gender="male">
       <view class="card-icon">🧑</view>
-      <text class="card-label">男生</text>
+      <text class="card-label">{{i18n.male}}</text>
     </view>
     <view class="gender-card {{playerGender === 'female' ? 'selected' : ''}}" bindtap="selectPlayerGender" data-gender="female">
       <view class="card-icon">👩</view>
-      <text class="card-label">女生</text>
+      <text class="card-label">{{i18n.female}}</text>
     </view>
   </view>
-  <button class="btn-next" bindtap="goToStep2" disabled="{{!playerGender}}">下一步</button>
+  
+  <button class="btn-next" bindtap="goToStep2" disabled="{{!playerGender}}">{{i18n.start}}</button>
 </view>
 
-<!-- 步骤2：选择伴侣性别 -->
+<!-- ==================== 步骤2：选择伴侣性别 ==================== -->
 <view class="container step-page" wx:if="{{step === 2}}">
   <view class="step-header">
     <text class="step-indicator">2 / 4</text>
-    <text class="step-title">选择伴侣的性别</text>
+    <text class="step-title">{{i18n.step1_title}}</text>
+    <text class="step-desc">{{i18n.step1_desc}}</text>
   </view>
+  
   <view class="card-group">
     <view class="gender-card {{companionGender === 'male' ? 'selected' : ''}}" bindtap="selectCompanionGender" data-gender="male">
       <view class="card-icon">🧑</view>
-      <text class="card-label">男生</text>
+      <text class="card-label">{{i18n.male}}</text>
     </view>
     <view class="gender-card {{companionGender === 'female' ? 'selected' : ''}}" bindtap="selectCompanionGender" data-gender="female">
       <view class="card-icon">👩</view>
-      <text class="card-label">女生</text>
+      <text class="card-label">{{i18n.female}}</text>
     </view>
   </view>
-  <button class="btn-next" bindtap="goToStep3" disabled="{{!companionGender}}">下一步</button>
+  
+  <button class="btn-next" bindtap="goToStep3" disabled="{{!companionGender}}">{{i18n.start}}</button>
 </view>
 
-<!-- 步骤3：自定义伴侣外观 -->
+<!-- ==================== 步骤3：自定义伴侣外观 ==================== -->
 <view class="container step-page" wx:if="{{step === 3}}">
   <view class="step-header">
     <text class="step-indicator">3 / 4</text>
-    <text class="step-title">自定义伴侣外观</text>
+    <text class="step-title">{{i18n.step2_title}}</text>
   </view>
+  
   <scroll-view scroll-y class="appearance-scroll">
     <!-- 伴侣预览 -->
     <view class="companion-preview">
@@ -72,137 +128,143 @@
           <view class="mouth mouth-{{appearance.mouthType}}"></view>
         </view>
       </view>
-      <text class="preview-name">{{companionGender === 'male' ? '小明' : '小花'}}</text>
+      <text class="preview-name">{{companionGender === 'male' ? i18n.male : i18n.female}}</text>
     </view>
-
+    
     <!-- 发型 -->
     <view class="option-section">
-      <text class="option-label">发型</text>
+      <text class="option-label">{{i18n.hair}}</text>
       <view class="option-group">
         <view class="option-item {{appearance.hairStyle === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="0">
           <view class="option-preview hair-mini-0"></view>
-          <text>短发</text>
+          <text>{{companionGender === 'male' ? '短发' : '长发'}}</text>
         </view>
         <view class="option-item {{appearance.hairStyle === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="1">
           <view class="option-preview hair-mini-1"></view>
-          <text>寸头</text>
+          <text>{{companionGender === 'male' ? '寸头' : '短发'}}</text>
         </view>
         <view class="option-item {{appearance.hairStyle === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="2">
           <view class="option-preview hair-mini-2"></view>
-          <text>侧分</text>
+          <text>{{companionGender === 'male' ? '侧分' : '双马尾'}}</text>
         </view>
         <view class="option-item {{appearance.hairStyle === 3 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="3">
           <view class="option-preview hair-mini-3"></view>
-          <text>蓬松</text>
+          <text>{{companionGender === 'male' ? '蓬松' : '丸子头'}}</text>
         </view>
         <view class="option-item {{appearance.hairStyle === 4 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="4">
           <view class="option-preview hair-mini-4"></view>
-          <text>背头</text>
+          <text>{{companionGender === 'male' ? '背头' : '卷发'}}</text>
         </view>
       </view>
     </view>
-
+    
     <!-- 肤色 -->
     <view class="option-section">
-      <text class="option-label">肤色</text>
-      <view class="option-group">
+      <text class="option-label">{{i18n.skin}}</text>
+      <view class="option-group color-group">
         <view class="option-item {{appearance.skinColor === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="0">
           <view class="color-dot skin-0"></view>
-          <text>白皙</text>
+          <text>{{currentLang === 'zh' ? '白皙' : 'Fair'}}</text>
         </view>
         <view class="option-item {{appearance.skinColor === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="1">
           <view class="color-dot skin-1"></view>
-          <text>自然</text>
+          <text>{{currentLang === 'zh' ? '自然' : 'Natural'}}</text>
         </view>
         <view class="option-item {{appearance.skinColor === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="2">
           <view class="color-dot skin-2"></view>
-          <text>小麦</text>
+          <text>{{currentLang === 'zh' ? '小麦' : 'Wheat'}}</text>
         </view>
         <view class="option-item {{appearance.skinColor === 3 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="3">
           <view class="color-dot skin-3"></view>
-          <text>古铜</text>
+          <text>{{currentLang === 'zh' ? '古铜' : 'Bronze'}}</text>
         </view>
         <view class="option-item {{appearance.skinColor === 4 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="4">
           <view class="color-dot skin-4"></view>
-          <text>深棕</text>
+          <text>{{currentLang === 'zh' ? '深棕' : 'Brown'}}</text>
         </view>
       </view>
     </view>
-
+    
     <!-- 脸型 -->
     <view class="option-section">
-      <text class="option-label">脸型</text>
+      <text class="option-label">{{i18n.face}}</text>
       <view class="option-group">
         <view class="option-item {{appearance.faceShape === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="0">
           <view class="shape-icon round-shape"></view>
-          <text>圆脸</text>
+          <text>{{currentLang === 'zh' ? '圆脸' : 'Round'}}</text>
         </view>
         <view class="option-item {{appearance.faceShape === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="1">
           <view class="shape-icon oval-shape"></view>
-          <text>鹅蛋脸</text>
+          <text>{{currentLang === 'zh' ? '鹅蛋脸' : 'Oval'}}</text>
         </view>
         <view class="option-item {{appearance.faceShape === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="2">
           <view class="shape-icon square-shape"></view>
-          <text>方脸</text>
+          <text>{{currentLang === 'zh' ? '方脸' : 'Square'}}</text>
         </view>
         <view class="option-item {{appearance.faceShape === 3 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="3">
           <view class="shape-icon heart-shape"></view>
-          <text>瓜子脸</text>
+          <text>{{currentLang === 'zh' ? '瓜子脸' : 'Heart'}}</text>
         </view>
         <view class="option-item {{appearance.faceShape === 4 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="4">
           <view class="shape-icon diamond-shape"></view>
-          <text>心形脸</text>
+          <text>{{currentLang === 'zh' ? '心形脸' : 'Diamond'}}</text>
         </view>
       </view>
     </view>
-
+    
     <!-- 眼睛 -->
     <view class="option-section">
-      <text class="option-label">眼睛</text>
+      <text class="option-label">{{i18n.eyes}}</text>
       <view class="option-group">
         <view class="option-item {{appearance.eyesType === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="eyesType" data-value="0">
           <view class="eye-icon big-eye"></view>
-          <text>大圆眼</text>
+          <text>{{currentLang === 'zh' ? '大圆眼' : 'Round'}}</text>
         </view>
         <view class="option-item {{appearance.eyesType === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="eyesType" data-value="1">
           <view class="eye-icon almond-eye"></view>
-          <text>弯弯眼</text>
+          <text>{{currentLang === 'zh' ? '弯弯眼' : 'Crescent'}}</text>
         </view>
         <view class="option-item {{appearance.eyesType === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="eyesType" data-value="2">
           <view class="eye-icon star-eye"></view>
-          <text>星星眼</text>
+          <text>{{currentLang === 'zh' ? '星星眼' : 'Star'}}</text>
         </view>
       </view>
     </view>
-
+    
     <!-- 嘴巴 -->
     <view class="option-section">
-      <text class="option-label">嘴巴</text>
+      <text class="option-label">{{i18n.mouth}}</text>
       <view class="option-group">
         <view class="option-item {{appearance.mouthType === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="mouthType" data-value="0">
           <view class="mouth-icon smile-mouth"></view>
-          <text>微笑</text>
+          <text>{{currentLang === 'zh' ? '微笑' : 'Smile'}}</text>
         </view>
         <view class="option-item {{appearance.mouthType === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="mouthType" data-value="1">
           <view class="mouth-icon big-smile-mouth"></view>
-          <text>大笑</text>
+          <text>{{currentLang === 'zh' ? '大笑' : 'Grin'}}</text>
         </view>
         <view class="option-item {{appearance.mouthType === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="mouthType" data-value="2">
           <view class="mouth-icon small-mouth"></view>
-          <text>小嘴</text>
+          <text>{{currentLang === 'zh' ? '小嘴' : 'Pout'}}</text>
         </view>
       </view>
     </view>
   </scroll-view>
-  <button class="btn-next" bindtap="goToStep4">下一步</button>
+  
+  <view class="btn-row">
+    <button class="btn-secondary" bindtap="prevStep">{{i18n.prev_step}}</button>
+    <button class="btn-next" bindtap="goToStep4">{{i18n.confirm_look}}</button>
+  </view>
 </view>
 
-<!-- 步骤4：输入玩家名字 -->
+<!-- ==================== 步骤4：输入伴侣名字 ==================== -->
 <view class="container step-page" wx:if="{{step === 4}}">
   <view class="step-header">
     <text class="step-indicator">4 / 4</text>
-    <text class="step-title">输入你的名字</text>
+    <text class="step-title">{{i18n.step3_title}}</text>
+    <text class="step-desc">{{i18n.step3_desc}}</text>
   </view>
+  
   <view class="name-input-section">
     <view class="companion-preview-small">
       <view class="avatar-body-small">
@@ -215,12 +277,16 @@
           <view class="mouth-small mouth-small-{{appearance.mouthType}}"></view>
         </view>
       </view>
-      <text class="preview-name-small">你的伴侣：{{companionGender === 'male' ? '小明' : '小花'}}</text>
+      <text class="preview-name-small">{{companionGender === 'male' ? i18n.male : i18n.female}}</text>
     </view>
+    
     <view class="input-wrapper">
-      <input class="name-input" type="text" placeholder="请输入你的名字" placeholder-style="color: #999;" maxlength="10" bindinput="onNameInput" value="{{playerName}}" />
+      <input class="name-input" type="text" placeholder="{{i18n.name_placeholder}}" placeholder-style="color: #999;" maxlength="8" bindinput="onNameInput" value="{{companionName}}" />
     </view>
-    <text class="input-hint">名字将用于游戏中的对话和互动</text>
   </view>
-  <button class="btn-start-game" bindtap="startGame" disabled="{{!playerName.trim()}}">开始游戏</button>
+  
+  <view class="btn-row">
+    <button class="btn-secondary" bindtap="prevStep">{{i18n.restart_custom}}</button>
+    <button class="btn-start-game" bindtap="startGame" disabled="{{!companionName.trim()}}">{{i18n.start_journey}}</button>
+  </view>
 </view>
