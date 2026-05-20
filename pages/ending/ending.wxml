@@ -1,0 +1,100 @@
+<!-- ==================== 结局页面 ==================== -->
+<view class="ending-container">
+
+  <!-- 伴侣形象区 -->
+  <view class="companion-section">
+    <view class="companion-avatar">
+      <view class="avatar-face {{faceClass}} {{skinClass}}">
+        <view class="hair {{hairClass}}"></view>
+        <view class="eyes {{eyesClass}}">
+          <view class="eye left-eye"></view>
+          <view class="eye right-eye"></view>
+        </view>
+        <view class="mouth {{mouthClass}}"></view>
+      </view>
+    </view>
+    <text class="companion-name">{{companionName}}</text>
+  </view>
+
+  <!-- 最终亲密度卡片 -->
+  <view class="card intimacy-card">
+    <view class="card-title">最终亲密度</view>
+    <view class="intimacy-header">
+      <text class="intimacy-value">{{intimacyText}} / 21</text>
+    </view>
+    <view class="progress-bar intimacy-bar">
+      <view class="progress-fill intimacy-fill" style="width: {{intimacyPercent}}%"></view>
+    </view>
+    <text class="intimacy-percent">{{intimacyPercent}}%</text>
+  </view>
+
+  <!-- 告别诗卡片 -->
+  <view class="card poem-card">
+    <view class="poem-content">
+      <text class="poem-text">{{farewellPoem}}</text>
+      <text class="poem-cursor" wx:if="{{farewellPoem.length < poemFullText.length}}">|</text>
+    </view>
+  </view>
+
+  <!-- 留言卡片 -->
+  <view class="card message-card">
+    <view class="card-title">留下你的话</view>
+    <block wx:if="{{!messageSubmitted}}">
+      <textarea
+        class="message-input"
+        placeholder="写下你想对{{companionName}}说的话..."
+        placeholder-style="color: #bbb;"
+        maxlength="500"
+        bindinput="onMessageInput"
+        value="{{messageText}}"
+        disabled="{{messageSubmitted}}"
+      ></textarea>
+      <view class="message-footer">
+        <text class="message-counter">{{messageLength}}/500</text>
+        <view class="submit-btn" bindtap="submitMessage">
+          <text>提交留言</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="message-submitted">
+        <text class="submitted-text">✅ 留言已提交</text>
+        <view class="submitted-content">
+          <text>{{messageText}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 导出按钮（留言提交后才显示） -->
+  <view class="export-section" wx:if="{{showExportBtn}}">
+    <view class="export-btn" bindtap="showPayConfirm">
+      <text>📄 导出全部对话记录 ¥1.00</text>
+    </view>
+  </view>
+
+  <!-- 重新开始按钮 -->
+  <view class="restart-section">
+    <view class="restart-btn" bindtap="restartGame">
+      <text>重新开始</text>
+    </view>
+  </view>
+
+  <!-- 支付确认弹窗 -->
+  <view class="pay-modal-mask" wx:if="{{showPayModal}}" bindtap="hidePayModal">
+    <view class="pay-modal" catchtap="">
+      <view class="pay-modal-title">确认支付</view>
+      <view class="pay-modal-desc">导出您与角色的全部对话内容，以PDF格式保存，留作珍贵回忆。</view>
+      <view class="pay-modal-amount">¥1.00</view>
+      <view class="pay-modal-buttons">
+        <view class="pay-btn pay-btn-cancel" bindtap="hidePayModal">
+          <text>取消</text>
+        </view>
+        <view class="pay-btn pay-btn-confirm" bindtap="confirmPay">
+          <text>确认支付</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

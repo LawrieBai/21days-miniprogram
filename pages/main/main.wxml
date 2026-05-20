@@ -1,0 +1,152 @@
+<!-- ==================== 主游戏页面 ==================== -->
+<view class="main-container">
+
+  <!-- 状态栏：天数 | 伴侣名字 | 积分 -->
+  <view class="status-bar">
+    <view class="status-day">第{{currentDay}}天</view>
+    <view class="status-name">{{companionName}}</view>
+    <view class="status-points" bindtap="claimPoints">
+      <block wx:if="{{!todayPointsClaimed}}">
+        <text class="points-claim">领取积分</text>
+      </block>
+      <block wx:else>
+        <text class="points-value">{{points}}积分</text>
+      </block>
+    </view>
+  </view>
+
+  <!-- 亲密度条 -->
+  <view class="intimacy-section">
+    <view class="intimacy-header">
+      <text class="intimacy-label">亲密度</text>
+      <text class="intimacy-value">{{intimacyText}} / 21</text>
+    </view>
+    <view class="progress-bar intimacy-bar">
+      <view class="progress-fill intimacy-fill" style="width: {{intimacyPercent}}%"></view>
+    </view>
+  </view>
+
+  <!-- 伴侣形象区 -->
+  <view class="companion-section">
+    <view class="companion-avatar">
+      <view class="avatar-face {{faceClass}} {{skinClass}}">
+        <view class="hair {{hairClass}}"></view>
+        <view class="eyes {{eyesClass}}">
+          <view class="eye left-eye"></view>
+          <view class="eye right-eye"></view>
+        </view>
+        <view class="mouth {{mouthClass}}"></view>
+      </view>
+    </view>
+    <text class="companion-name">{{companionName}}</text>
+  </view>
+
+  <!-- 每日对话进度 -->
+  <view class="chat-progress-section">
+    <view class="chat-progress-header">
+      <text class="chat-progress-label">{{chatText}}</text>
+    </view>
+    <view class="progress-bar chat-progress-bar">
+      <view class="progress-fill chat-progress-fill" style="width: {{chatPercent}}%"></view>
+    </view>
+  </view>
+
+  <!-- 聊天区域 -->
+  <scroll-view class="chat-area" scroll-y scroll-into-view="{{scrollToBottom}}" scroll-with-animation>
+    <view class="chat-list">
+      <!-- 系统消息 -->
+      <view class="msg-system" wx:for="{{chatHistory}}" wx:key="index" wx:if="{{item.type === 'system'}}">
+        <text class="msg-system-text">{{item.text}}</text>
+      </view>
+
+      <!-- 用户消息 -->
+      <view class="msg-row msg-row-user" wx:if="{{item.type === 'user'}}">
+        <view class="msg-bubble msg-bubble-user">
+          <text class="msg-text">{{item.text}}</text>
+        </view>
+      </view>
+
+      <!-- AI消息 -->
+      <view class="msg-row msg-row-ai" wx:if="{{item.type === 'ai'}}">
+        <view class="ai-avatar-mini">
+          <view class="mini-face {{faceClass}} {{skinClass}}">
+            <view class="mini-hair {{hairClass}}"></view>
+            <view class="mini-eyes {{eyesClass}}">
+              <view class="mini-eye"></view>
+              <view class="mini-eye"></view>
+            </view>
+            <view class="mini-mouth {{mouthClass}}"></view>
+          </view>
+        </view>
+        <view class="msg-bubble msg-bubble-ai">
+          <text class="msg-text">{{item.text}}</text>
+        </view>
+      </view>
+
+      <!-- 打字动画 -->
+      <view class="msg-row msg-row-ai" wx:if="{{isTyping}}">
+        <view class="ai-avatar-mini">
+          <view class="mini-face {{faceClass}} {{skinClass}}">
+            <view class="mini-hair {{hairClass}}"></view>
+            <view class="mini-eyes {{eyesClass}}">
+              <view class="mini-eye"></view>
+              <view class="mini-eye"></view>
+            </view>
+            <view class="mini-mouth {{mouthClass}}"></view>
+          </view>
+        </view>
+        <view class="msg-bubble msg-bubble-ai typing-bubble">
+          <view class="typing-dots">
+            <view class="typing-dot"></view>
+            <view class="typing-dot"></view>
+            <view class="typing-dot"></view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 滚动锚点 -->
+      <view id="{{scrollToBottom}}"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <input class="chat-input" type="text" placeholder="和{{companionName}}说点什么..." placeholder-style="color: #bbb;" maxlength="200" bindinput="onInput" value="{{inputText}}" confirm-type="send" bindconfirm="sendMessage" />
+    <view class="send-btn {{inputText.trim() ? 'active' : ''}}" bindtap="sendMessage">
+      <text>发送</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-bar">
+    <view class="action-btn gift-btn" bindtap="showGiftPanel">
+      <text>🎁 送礼物</text>
+    </view>
+    <view class="action-btn end-btn" bindtap="endGame">
+      <text>⏩ 结束游戏</text>
+    </view>
+  </view>
+
+  <!-- 礼物弹窗 -->
+  <view class="gift-modal-mask" wx:if="{{showGiftModal}}" bindtap="hideGiftPanel">
+    <view class="gift-modal" catchtap="">
+      <view class="gift-modal-title">选择礼物</view>
+      <view class="gift-modal-subtitle">当前积分：{{points}} | 今日礼物加成：{{todayGiftIntimacy.toFixed(2)}}/{{DAILY_GIFT_INTIMACY_LIMIT}}</view>
+
+      <view class="gift-list">
+        <view class="gift-item" wx:for="{{gifts}}" wx:key="id" bindtap="buyGift" data-id="{{item.id}}">
+          <text class="gift-emoji">{{item.emoji}}</text>
+          <view class="gift-info">
+            <text class="gift-name">{{item.name}}</text>
+            <text class="gift-desc">{{item.cost}}积分 | 亲密度+{{item.intimacy.toFixed(2)}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="gift-modal-close" bindtap="hideGiftPanel">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+
+</view>

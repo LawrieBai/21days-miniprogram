@@ -1,0 +1,691 @@
+/* ==================== 主容器 ==================== */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #ff9a9e 0%, #fecfef 40%, #fdfcfb 100%);
+  box-sizing: border-box;
+  padding-bottom: 0;
+}
+
+/* ==================== 状态栏 ==================== */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.status-day {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.status-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.status-points {
+  min-width: 140rpx;
+  text-align: center;
+}
+
+.points-claim {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 10rpx 24rpx;
+  border-radius: 50rpx;
+  display: inline-block;
+}
+
+.points-value {
+  font-size: 26rpx;
+  color: #764ba2;
+  font-weight: 600;
+}
+
+/* ==================== 亲密度条 ==================== */
+.intimacy-section {
+  padding: 16rpx 30rpx;
+}
+
+.intimacy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.intimacy-label {
+  font-size: 26rpx;
+  color: #555;
+  font-weight: 500;
+}
+
+.intimacy-value {
+  font-size: 26rpx;
+  color: #ee5a24;
+  font-weight: 700;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16rpx;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 8rpx;
+  transition: width 0.5s ease;
+}
+
+.intimacy-fill {
+  background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+}
+
+/* ==================== 伴侣形象区 ==================== */
+.companion-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0 10rpx;
+}
+
+.companion-avatar {
+  width: 180rpx;
+  height: 210rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.avatar-face {
+  width: 140rpx;
+  height: 164rpx;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 肤色 */
+.skin-0 { background: #FFE4C4; }
+.skin-1 { background: #FFDAB9; }
+.skin-2 { background: #D2A679; }
+.skin-3 { background: #b8956a; }
+.skin-4 { background: #8b6f47; }
+
+/* 脸型 */
+.face-0 { border-radius: 50%; }
+.face-1 { border-radius: 45% 45% 50% 50%; }
+.face-2 { border-radius: 20%; }
+.face-3 { border-radius: 45% 45% 55% 55%; }
+.face-4 { border-radius: 50% 50% 40% 40%; }
+
+/* 发型 */
+.hair {
+  position: absolute;
+  top: -10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150rpx;
+  height: 80rpx;
+  background: #2c2c2c;
+  border-radius: 50% 50% 0 0;
+  z-index: 2;
+}
+
+.hair-0 {
+  height: 56rpx;
+  width: 136rpx;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.hair-1 {
+  height: 45rpx;
+  width: 136rpx;
+  border-radius: 50% 50% 30% 30%;
+  top: -5rpx;
+}
+
+.hair-2 {
+  height: 80rpx;
+  width: 148rpx;
+  border-radius: 40% 60% 10% 10%;
+  left: 45%;
+}
+
+.hair-3 {
+  height: 100rpx;
+  width: 152rpx;
+  border-radius: 50% 50% 20% 20%;
+  top: -15rpx;
+}
+
+.hair-4 {
+  height: 62rpx;
+  width: 142rpx;
+  border-radius: 40% 40% 0 0;
+  top: -8rpx;
+}
+
+/* 眼睛 */
+.eyes {
+  position: absolute;
+  top: 64rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28rpx;
+  z-index: 1;
+}
+
+.eye {
+  width: 14rpx;
+  height: 14rpx;
+  background: #333;
+  border-radius: 50%;
+}
+
+.eyes-0 .eye {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.eyes-1 .eye {
+  width: 18rpx;
+  height: 14rpx;
+  border-radius: 50% 50% 40% 40%;
+}
+
+.eyes-2 .eye {
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  position: relative;
+}
+
+.eyes-2 .eye::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8rpx;
+  height: 8rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* 嘴巴 */
+.mouth {
+  position: absolute;
+  bottom: 34rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20rpx;
+  height: 10rpx;
+  z-index: 1;
+}
+
+.mouth-0 {
+  border-bottom: 3rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 26rpx;
+  height: 13rpx;
+}
+
+.mouth-1 {
+  border-bottom: 4rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 32rpx;
+  height: 18rpx;
+}
+
+.mouth-2 {
+  border-bottom: 2rpx solid #d88;
+  width: 18rpx;
+  height: 4rpx;
+  border-radius: 0 0 30% 30%;
+}
+
+.companion-name {
+  font-size: 30rpx;
+  color: #555;
+  font-weight: 600;
+}
+
+/* ==================== 每日对话进度 ==================== */
+.chat-progress-section {
+  padding: 10rpx 30rpx 16rpx;
+}
+
+.chat-progress-header {
+  margin-bottom: 8rpx;
+}
+
+.chat-progress-label {
+  font-size: 24rpx;
+  color: #555;
+  font-weight: 500;
+}
+
+.chat-progress-bar {
+  height: 12rpx;
+}
+
+.chat-progress-fill {
+  background: linear-gradient(90deg, #00b894, #00cec9);
+}
+
+/* ==================== 聊天区域 ==================== */
+.chat-area {
+  flex: 1;
+  min-height: 300rpx;
+  max-height: 600rpx;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20rpx;
+}
+
+/* 系统消息 */
+.msg-system {
+  text-align: center;
+  padding: 12rpx 0;
+}
+
+.msg-system-text {
+  font-size: 22rpx;
+  color: #999;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 6rpx 20rpx;
+  border-radius: 16rpx;
+}
+
+/* 消息行 */
+.msg-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.msg-row-user {
+  justify-content: flex-end;
+}
+
+.msg-row-ai {
+  justify-content: flex-start;
+}
+
+/* 消息气泡 */
+.msg-bubble {
+  max-width: 65%;
+  padding: 18rpx 24rpx;
+  border-radius: 24rpx;
+  box-sizing: border-box;
+}
+
+.msg-bubble-user {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-bottom-right-radius: 8rpx;
+}
+
+.msg-bubble-user .msg-text {
+  color: #fff;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.msg-bubble-ai {
+  background: #fff;
+  border-bottom-left-radius: 8rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  margin-left: 12rpx;
+}
+
+.msg-bubble-ai .msg-text {
+  color: #444;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.msg-text {
+  word-break: break-all;
+}
+
+/* AI小头像 */
+.ai-avatar-mini {
+  width: 60rpx;
+  height: 60rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-face {
+  width: 52rpx;
+  height: 60rpx;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.mini-face.skin-0 { background: #FFE4C4; }
+.mini-face.skin-1 { background: #FFDAB9; }
+.mini-face.skin-2 { background: #D2A679; }
+.mini-face.skin-3 { background: #b8956a; }
+.mini-face.skin-4 { background: #8b6f47; }
+
+.mini-face.face-0 { border-radius: 50%; }
+.mini-face.face-1 { border-radius: 45% 45% 50% 50%; }
+.mini-face.face-2 { border-radius: 20%; }
+.mini-face.face-3 { border-radius: 45% 45% 55% 55%; }
+.mini-face.face-4 { border-radius: 50% 50% 40% 40%; }
+
+.mini-hair {
+  position: absolute;
+  top: -4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56rpx;
+  height: 30rpx;
+  background: #2c2c2c;
+  border-radius: 50% 50% 0 0;
+  z-index: 2;
+}
+
+.mini-hair-0 { height: 22rpx; width: 50rpx; border-radius: 50% 50% 20% 20%; }
+.mini-hair-1 { height: 18rpx; width: 50rpx; border-radius: 50% 50% 30% 30%; top: -3rpx; }
+.mini-hair-2 { height: 32rpx; width: 54rpx; border-radius: 40% 60% 10% 10%; left: 45%; }
+.mini-hair-3 { height: 40rpx; width: 56rpx; border-radius: 50% 50% 20% 20%; top: -6rpx; }
+.mini-hair-4 { height: 26rpx; width: 52rpx; border-radius: 40% 40% 0 0; top: -4rpx; }
+
+.mini-eyes {
+  position: absolute;
+  top: 24rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10rpx;
+  z-index: 1;
+}
+
+.mini-eye {
+  width: 7rpx;
+  height: 7rpx;
+  background: #333;
+  border-radius: 50%;
+}
+
+.mini-eyes-0 .mini-eye { width: 9rpx; height: 9rpx; }
+.mini-eyes-1 .mini-eye { width: 8rpx; height: 6rpx; border-radius: 50% 50% 40% 40%; }
+.mini-eyes-2 .mini-eye { width: 8rpx; height: 8rpx; border-radius: 50%; position: relative; }
+.mini-eyes-2 .mini-eye::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rpx;
+  height: 3rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.mini-mouth {
+  position: absolute;
+  bottom: 12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.mini-mouth-0 {
+  border-bottom: 2rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 10rpx;
+  height: 5rpx;
+}
+
+.mini-mouth-1 {
+  border-bottom: 2rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 12rpx;
+  height: 6rpx;
+}
+
+.mini-mouth-2 {
+  border-bottom: 1rpx solid #d88;
+  width: 6rpx;
+  height: 2rpx;
+  border-radius: 0 0 30% 30%;
+}
+
+/* 打字动画 */
+.typing-bubble {
+  padding: 20rpx 28rpx;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 8rpx;
+  align-items: center;
+}
+
+.typing-dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #ccc;
+  border-radius: 50%;
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-10rpx);
+    opacity: 1;
+  }
+}
+
+/* ==================== 输入区域 ==================== */
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  gap: 16rpx;
+}
+
+.chat-input {
+  flex: 1;
+  height: 76rpx;
+  background: #fff;
+  border-radius: 38rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  border: 2rpx solid rgba(102, 126, 234, 0.15);
+}
+
+.send-btn {
+  width: 120rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  background: #ddd;
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 50rpx;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.send-btn.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 4rpx 16rpx rgba(102, 126, 234, 0.4);
+}
+
+/* ==================== 操作按钮 ==================== */
+.action-bar {
+  display: flex;
+  gap: 20rpx;
+  padding: 16rpx 30rpx 30rpx;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.gift-btn {
+  background: linear-gradient(135deg, #fd79a8, #e84393);
+  color: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(232, 67, 147, 0.3);
+}
+
+.gift-btn:active {
+  transform: scale(0.96);
+}
+
+.end-btn {
+  background: rgba(0, 0, 0, 0.06);
+  color: #888;
+}
+
+.end-btn:active {
+  transform: scale(0.96);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== 礼物弹窗 ==================== */
+.gift-modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-modal {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 30rpx;
+  padding: 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.15);
+}
+
+.gift-modal-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 12rpx;
+}
+
+.gift-modal-subtitle {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.gift-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.gift-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background: #fafafa;
+  border-radius: 20rpx;
+  border: 2rpx solid #eee;
+  transition: all 0.3s ease;
+}
+
+.gift-item:active {
+  background: #f0f0f0;
+  transform: scale(0.98);
+}
+
+.gift-emoji {
+  font-size: 56rpx;
+  margin-right: 24rpx;
+}
+
+.gift-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.gift-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.gift-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.gift-modal-close {
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+  border-top: 1rpx solid #eee;
+  margin: 0 -40rpx -40rpx;
+  border-radius: 0 0 30rpx 30rpx;
+}

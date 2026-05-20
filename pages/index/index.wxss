@@ -1,0 +1,825 @@
+/* ==================== 通用 ==================== */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==================== 粒子动画 ==================== */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* ==================== 封面页 ==================== */
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  z-index: 1;
+  padding-top: 200rpx;
+}
+
+.cover-icon {
+  font-size: 120rpx;
+  margin-bottom: 40rpx;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.cover-title {
+  font-size: 96rpx;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 4rpx 20rpx rgba(102, 126, 234, 0.4);
+  margin-bottom: 16rpx;
+  letter-spacing: 8rpx;
+}
+
+.cover-subtitle {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  margin-bottom: 24rpx;
+  letter-spacing: 6rpx;
+}
+
+.cover-desc {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 80rpx;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.btn-start {
+  width: 400rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  border: none;
+  letter-spacing: 4rpx;
+  box-shadow: 0 8rpx 30rpx rgba(102, 126, 234, 0.45);
+  transition: all 0.3s ease;
+}
+
+.btn-start::after {
+  border: none;
+}
+
+.btn-start:active {
+  transform: scale(0.96);
+  box-shadow: 0 4rpx 16rpx rgba(102, 126, 234, 0.3);
+}
+
+/* ==================== 步骤页通用 ==================== */
+.step-page {
+  padding-top: 80rpx;
+  justify-content: flex-start;
+}
+
+.step-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60rpx;
+}
+
+.step-indicator {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 16rpx;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6rpx 24rpx;
+  border-radius: 20rpx;
+}
+
+.step-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+/* ==================== 性别选择卡片 ==================== */
+.card-group {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+  margin-bottom: 80rpx;
+  width: 100%;
+}
+
+.gender-card {
+  width: 280rpx;
+  height: 340rpx;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4rpx solid transparent;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gender-card.selected {
+  border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+  border-width: 4rpx;
+  border-style: solid;
+  transform: scale(1.06);
+  box-shadow: 0 12rpx 40rpx rgba(102, 126, 234, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* 兼容 border-image 和 border-radius */
+.gender-card.selected {
+  border-image: none;
+  border: 4rpx solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.gender-card.selected::before {
+  content: '';
+  position: absolute;
+  top: -4rpx;
+  left: -4rpx;
+  right: -4rpx;
+  bottom: -4rpx;
+  border-radius: 34rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  z-index: -1;
+}
+
+.card-icon {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+}
+
+.card-label {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #444;
+}
+
+/* ==================== 下一步按钮 ==================== */
+.btn-next {
+  width: 400rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+  border: none;
+  box-shadow: 0 8rpx 30rpx rgba(102, 126, 234, 0.4);
+  margin-top: auto;
+  margin-bottom: 60rpx;
+}
+
+.btn-next::after {
+  border: none;
+}
+
+.btn-next[disabled] {
+  background: #ccc;
+  box-shadow: none;
+  color: #fff;
+}
+
+.btn-next:active {
+  transform: scale(0.96);
+}
+
+/* ==================== 外观自定义 ==================== */
+.appearance-scroll {
+  flex: 1;
+  width: 100%;
+  max-height: calc(100vh - 500rpx);
+}
+
+.companion-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.avatar-body {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 16rpx;
+}
+
+.avatar-face {
+  width: 120rpx;
+  height: 140rpx;
+  background: #fdd9b5;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* 肤色 */
+.skin-0 { background: #fde8d0; }
+.skin-1 { background: #fdd9b5; }
+.skin-2 { background: #d4a574; }
+.skin-3 { background: #b8956a; }
+.skin-4 { background: #8b6f47; }
+
+/* 脸型 */
+.face-0 { border-radius: 50%; }
+.face-1 { border-radius: 50% 50% 45% 45%; }
+.face-2 { border-radius: 35%; }
+.face-3 { border-radius: 45% 45% 55% 55%; }
+.face-4 { border-radius: 50% 50% 40% 40%; }
+
+/* 发型 */
+.hair {
+  position: absolute;
+  top: -10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130rpx;
+  height: 70rpx;
+  background: #4a3728;
+  border-radius: 50% 50% 0 0;
+  z-index: 2;
+}
+
+.hair-0 {
+  height: 50rpx;
+  width: 120rpx;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.hair-1 {
+  height: 40rpx;
+  width: 120rpx;
+  border-radius: 50% 50% 30% 30%;
+  top: -5rpx;
+}
+
+.hair-2 {
+  height: 70rpx;
+  width: 130rpx;
+  border-radius: 40% 60% 10% 10%;
+  left: 45%;
+}
+
+.hair-3 {
+  height: 90rpx;
+  width: 135rpx;
+  border-radius: 50% 50% 20% 20%;
+  top: -15rpx;
+}
+
+.hair-4 {
+  height: 55rpx;
+  width: 125rpx;
+  border-radius: 40% 40% 0 0;
+  top: -8rpx;
+}
+
+/* 眼睛 */
+.eyes {
+  position: absolute;
+  top: 55rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 24rpx;
+  z-index: 1;
+}
+
+.eye {
+  width: 14rpx;
+  height: 14rpx;
+  background: #333;
+  border-radius: 50%;
+}
+
+.eyes-0 .eye {
+  width: 18rpx;
+  height: 18rpx;
+}
+
+.eyes-1 .eye {
+  width: 16rpx;
+  height: 12rpx;
+  border-radius: 50% 50% 40% 40%;
+}
+
+.eyes-2 .eye {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  position: relative;
+}
+
+.eyes-2 .eye::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8rpx;
+  height: 8rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* 嘴巴 */
+.mouth {
+  position: absolute;
+  bottom: 30rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20rpx;
+  height: 10rpx;
+  z-index: 1;
+}
+
+.mouth-0 {
+  border-bottom: 3rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 24rpx;
+  height: 12rpx;
+}
+
+.mouth-1 {
+  border-bottom: 4rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 28rpx;
+  height: 16rpx;
+}
+
+.mouth-2 {
+  border-bottom: 2rpx solid #d88;
+  width: 16rpx;
+  height: 4rpx;
+  border-radius: 0 0 30% 30%;
+}
+
+.preview-name {
+  font-size: 28rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+/* 选项区域 */
+.option-section {
+  margin-bottom: 36rpx;
+}
+
+.option-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 16rpx;
+  display: block;
+  padding-left: 10rpx;
+}
+
+.option-group {
+  display: flex;
+  gap: 20rpx;
+}
+
+.option-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.3s ease;
+}
+
+.option-item.active {
+  background: rgba(255, 255, 255, 0.95);
+  position: relative;
+  border: none;
+}
+
+.option-item.active::before {
+  content: '';
+  position: absolute;
+  top: -3rpx;
+  left: -3rpx;
+  right: -3rpx;
+  bottom: -3rpx;
+  border-radius: 22rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  z-index: -1;
+}
+
+.option-item text {
+  font-size: 24rpx;
+  color: #555;
+  margin-top: 10rpx;
+}
+
+.option-item.active text {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* 选项预览图标 */
+.option-preview {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: #fdd9b5;
+  position: relative;
+  overflow: hidden;
+}
+
+.hair-mini-0::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50rpx;
+  height: 22rpx;
+  background: #4a3728;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.hair-mini-1::before {
+  content: '';
+  position: absolute;
+  top: -4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56rpx;
+  height: 32rpx;
+  background: #4a3728;
+  border-radius: 50% 50% 10% 10%;
+}
+
+.hair-mini-2::before {
+  content: '';
+  position: absolute;
+  top: -4rpx;
+  left: 45%;
+  transform: translateX(-50%);
+  width: 56rpx;
+  height: 32rpx;
+  background: #4a3728;
+  border-radius: 40% 60% 10% 10%;
+}
+
+.hair-mini-3::before {
+  content: '';
+  position: absolute;
+  top: -6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58rpx;
+  height: 38rpx;
+  background: #4a3728;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.hair-mini-4::before {
+  content: '';
+  position: absolute;
+  top: -2rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54rpx;
+  height: 26rpx;
+  background: #4a3728;
+  border-radius: 40% 40% 0 0;
+}
+
+/* 肤色圆点 */
+.color-dot {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  border: 3rpx solid rgba(0, 0, 0, 0.08);
+}
+
+.color-dot.skin-0 { background: #fde8d0; }
+.color-dot.skin-1 { background: #fdd9b5; }
+.color-dot.skin-2 { background: #d4a574; }
+.color-dot.skin-3 { background: #b8956a; }
+.color-dot.skin-4 { background: #8b6f47; }
+
+/* 脸型图标 */
+.shape-icon {
+  width: 50rpx;
+  height: 56rpx;
+  background: #fdd9b5;
+  border: 2rpx solid rgba(0, 0, 0, 0.06);
+}
+
+.round-shape { border-radius: 50%; }
+.oval-shape { border-radius: 50% 50% 45% 45%; }
+.square-shape { border-radius: 30%; }
+.heart-shape { border-radius: 45% 45% 55% 55%; }
+.diamond-shape { border-radius: 50% 50% 40% 40%; }
+
+/* 眼睛图标 */
+.eye-icon {
+  width: 50rpx;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+}
+
+.big-eye::before, .big-eye::after {
+  content: '';
+  width: 14rpx;
+  height: 14rpx;
+  background: #333;
+  border-radius: 50%;
+}
+
+.almond-eye::before, .almond-eye::after {
+  content: '';
+  width: 14rpx;
+  height: 10rpx;
+  background: #333;
+  border-radius: 50% 50% 40% 40%;
+}
+
+.star-eye::before, .star-eye::after {
+  content: '';
+  width: 14rpx;
+  height: 14rpx;
+  background: #333;
+  border-radius: 50%;
+  position: relative;
+}
+
+.star-eye::before {
+  box-shadow: 2rpx -2rpx 0 -4rpx #333, -2rpx -2rpx 0 -4rpx #333, 0 -4rpx 0 -5rpx #333, 0 4rpx 0 -5rpx #333, 4rpx 0 0 -5rpx #333, -4rpx 0 0 -5rpx #333;
+}
+
+/* 嘴巴图标 */
+.mouth-icon {
+  width: 30rpx;
+  height: 16rpx;
+}
+
+.smile-mouth {
+  border-bottom: 3rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+}
+
+.big-smile-mouth {
+  border-bottom: 4rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 34rpx;
+  height: 18rpx;
+}
+
+.small-mouth {
+  border-bottom: 2rpx solid #d88;
+  width: 18rpx;
+  height: 4rpx;
+  border-radius: 0 0 30% 30%;
+}
+
+/* ==================== 输入名字页 ==================== */
+.name-input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+}
+
+.companion-preview-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+
+.avatar-body-small {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 12rpx;
+}
+
+.avatar-face-small {
+  width: 80rpx;
+  height: 94rpx;
+  background: #fdd9b5;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.avatar-face-small.skin-0 { background: #fde8d0; }
+.avatar-face-small.skin-1 { background: #fdd9b5; }
+.avatar-face-small.skin-2 { background: #d4a574; }
+.avatar-face-small.skin-3 { background: #b8956a; }
+.avatar-face-small.skin-4 { background: #8b6f47; }
+
+.avatar-face-small.face-0 { border-radius: 50%; }
+.avatar-face-small.face-1 { border-radius: 50% 50% 45% 45%; }
+.avatar-face-small.face-2 { border-radius: 35%; }
+.avatar-face-small.face-3 { border-radius: 45% 45% 55% 55%; }
+.avatar-face-small.face-4 { border-radius: 50% 50% 40% 40%; }
+
+.hair-small {
+  position: absolute;
+  top: -6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86rpx;
+  height: 46rpx;
+  background: #4a3728;
+  border-radius: 50% 50% 0 0;
+  z-index: 2;
+}
+
+.hair-small-0 { height: 34rpx; width: 80rpx; border-radius: 50% 50% 20% 20%; }
+.hair-small-1 { height: 28rpx; width: 80rpx; border-radius: 50% 50% 30% 30%; top: -4rpx; }
+.hair-small-2 { height: 48rpx; width: 86rpx; border-radius: 40% 60% 10% 10%; left: 45%; }
+.hair-small-3 { height: 60rpx; width: 90rpx; border-radius: 50% 50% 20% 20%; top: -10rpx; }
+.hair-small-4 { height: 38rpx; width: 84rpx; border-radius: 40% 40% 0 0; top: -6rpx; }
+
+.eyes-small {
+  position: absolute;
+  top: 38rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16rpx;
+  z-index: 1;
+}
+
+.eye-small {
+  width: 10rpx;
+  height: 10rpx;
+  background: #333;
+  border-radius: 50%;
+}
+
+.eyes-small-0 .eye-small { width: 12rpx; height: 12rpx; }
+.eyes-small-1 .eye-small { width: 10rpx; height: 8rpx; border-radius: 50% 50% 40% 40%; }
+.eyes-small-2 .eye-small { width: 10rpx; height: 10rpx; border-radius: 50%; position: relative; }
+.eyes-small-2 .eye-small::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4rpx;
+  height: 4rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.mouth-small {
+  position: absolute;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.mouth-small-0 {
+  border-bottom: 2rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 16rpx;
+  height: 8rpx;
+}
+
+.mouth-small-1 {
+  border-bottom: 2rpx solid #e88;
+  border-radius: 0 0 50% 50%;
+  width: 18rpx;
+  height: 10rpx;
+}
+
+.mouth-small-2 {
+  border-bottom: 1rpx solid #d88;
+  width: 10rpx;
+  height: 2rpx;
+  border-radius: 0 0 30% 30%;
+}
+
+.preview-name-small {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.input-wrapper {
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  margin-bottom: 16rpx;
+}
+
+.name-input {
+  width: 100%;
+  height: 96rpx;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 24rpx;
+  padding: 0 36rpx;
+  font-size: 32rpx;
+  color: #333;
+  box-sizing: border-box;
+  border: 3rpx solid rgba(102, 126, 234, 0.15);
+  transition: border-color 0.3s;
+}
+
+.name-input:focus {
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.input-hint {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+/* ==================== 开始游戏按钮 ==================== */
+.btn-start-game {
+  width: 400rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 700;
+  border-radius: 48rpx;
+  border: none;
+  letter-spacing: 6rpx;
+  box-shadow: 0 8rpx 30rpx rgba(102, 126, 234, 0.5);
+  margin-top: auto;
+  margin-bottom: 60rpx;
+}
+
+.btn-start-game::after {
+  border: none;
+}
+
+.btn-start-game[disabled] {
+  background: #ccc;
+  box-shadow: none;
+  color: #fff;
+}
+
+.btn-start-game:active {
+  transform: scale(0.96);
+}

@@ -1,0 +1,226 @@
+<!-- 封面页 -->
+<view class="container" wx:if="{{step === 0}}">
+  <!-- 粒子动画 -->
+  <view class="particles">
+    <view class="particle" wx:for="{{particles}}" wx:key="index"
+      style="left: {{item.x}}%; top: {{item.y}}%; width: {{item.size}}rpx; height: {{item.size}}rpx; opacity: {{item.opacity}}; animation-duration: {{item.duration}}s; animation-delay: {{item.delay}}s;">
+    </view>
+  </view>
+  <view class="cover-content">
+    <view class="cover-icon">💕</view>
+    <text class="cover-title">21天</text>
+    <text class="cover-subtitle">陪伴养成游戏</text>
+    <text class="cover-desc">用21天的时间，培养一段美好的陪伴关系</text>
+    <button class="btn-start" bindtap="goToStep1">开始旅程</button>
+  </view>
+</view>
+
+<!-- 步骤1：选择玩家性别 -->
+<view class="container step-page" wx:if="{{step === 1}}">
+  <view class="step-header">
+    <text class="step-indicator">1 / 4</text>
+    <text class="step-title">选择你的性别</text>
+  </view>
+  <view class="card-group">
+    <view class="gender-card {{playerGender === 'male' ? 'selected' : ''}}" bindtap="selectPlayerGender" data-gender="male">
+      <view class="card-icon">🧑</view>
+      <text class="card-label">男生</text>
+    </view>
+    <view class="gender-card {{playerGender === 'female' ? 'selected' : ''}}" bindtap="selectPlayerGender" data-gender="female">
+      <view class="card-icon">👩</view>
+      <text class="card-label">女生</text>
+    </view>
+  </view>
+  <button class="btn-next" bindtap="goToStep2" disabled="{{!playerGender}}">下一步</button>
+</view>
+
+<!-- 步骤2：选择伴侣性别 -->
+<view class="container step-page" wx:if="{{step === 2}}">
+  <view class="step-header">
+    <text class="step-indicator">2 / 4</text>
+    <text class="step-title">选择伴侣的性别</text>
+  </view>
+  <view class="card-group">
+    <view class="gender-card {{companionGender === 'male' ? 'selected' : ''}}" bindtap="selectCompanionGender" data-gender="male">
+      <view class="card-icon">🧑</view>
+      <text class="card-label">男生</text>
+    </view>
+    <view class="gender-card {{companionGender === 'female' ? 'selected' : ''}}" bindtap="selectCompanionGender" data-gender="female">
+      <view class="card-icon">👩</view>
+      <text class="card-label">女生</text>
+    </view>
+  </view>
+  <button class="btn-next" bindtap="goToStep3" disabled="{{!companionGender}}">下一步</button>
+</view>
+
+<!-- 步骤3：自定义伴侣外观 -->
+<view class="container step-page" wx:if="{{step === 3}}">
+  <view class="step-header">
+    <text class="step-indicator">3 / 4</text>
+    <text class="step-title">自定义伴侣外观</text>
+  </view>
+  <scroll-view scroll-y class="appearance-scroll">
+    <!-- 伴侣预览 -->
+    <view class="companion-preview">
+      <view class="avatar-body">
+        <view class="avatar-face face-{{appearance.faceShape}} skin-{{appearance.skinColor}}">
+          <view class="hair hair-{{appearance.hairStyle}}"></view>
+          <view class="eyes eyes-{{appearance.eyesType}}">
+            <view class="eye left-eye"></view>
+            <view class="eye right-eye"></view>
+          </view>
+          <view class="mouth mouth-{{appearance.mouthType}}"></view>
+        </view>
+      </view>
+      <text class="preview-name">{{companionGender === 'male' ? '小明' : '小花'}}</text>
+    </view>
+
+    <!-- 发型 -->
+    <view class="option-section">
+      <text class="option-label">发型</text>
+      <view class="option-group">
+        <view class="option-item {{appearance.hairStyle === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="0">
+          <view class="option-preview hair-mini-0"></view>
+          <text>短发</text>
+        </view>
+        <view class="option-item {{appearance.hairStyle === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="1">
+          <view class="option-preview hair-mini-1"></view>
+          <text>寸头</text>
+        </view>
+        <view class="option-item {{appearance.hairStyle === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="2">
+          <view class="option-preview hair-mini-2"></view>
+          <text>侧分</text>
+        </view>
+        <view class="option-item {{appearance.hairStyle === 3 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="3">
+          <view class="option-preview hair-mini-3"></view>
+          <text>蓬松</text>
+        </view>
+        <view class="option-item {{appearance.hairStyle === 4 ? 'active' : ''}}" bindtap="setAppearance" data-key="hairStyle" data-value="4">
+          <view class="option-preview hair-mini-4"></view>
+          <text>背头</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 肤色 -->
+    <view class="option-section">
+      <text class="option-label">肤色</text>
+      <view class="option-group">
+        <view class="option-item {{appearance.skinColor === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="0">
+          <view class="color-dot skin-0"></view>
+          <text>白皙</text>
+        </view>
+        <view class="option-item {{appearance.skinColor === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="1">
+          <view class="color-dot skin-1"></view>
+          <text>自然</text>
+        </view>
+        <view class="option-item {{appearance.skinColor === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="2">
+          <view class="color-dot skin-2"></view>
+          <text>小麦</text>
+        </view>
+        <view class="option-item {{appearance.skinColor === 3 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="3">
+          <view class="color-dot skin-3"></view>
+          <text>古铜</text>
+        </view>
+        <view class="option-item {{appearance.skinColor === 4 ? 'active' : ''}}" bindtap="setAppearance" data-key="skinColor" data-value="4">
+          <view class="color-dot skin-4"></view>
+          <text>深棕</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 脸型 -->
+    <view class="option-section">
+      <text class="option-label">脸型</text>
+      <view class="option-group">
+        <view class="option-item {{appearance.faceShape === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="0">
+          <view class="shape-icon round-shape"></view>
+          <text>圆脸</text>
+        </view>
+        <view class="option-item {{appearance.faceShape === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="1">
+          <view class="shape-icon oval-shape"></view>
+          <text>鹅蛋脸</text>
+        </view>
+        <view class="option-item {{appearance.faceShape === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="2">
+          <view class="shape-icon square-shape"></view>
+          <text>方脸</text>
+        </view>
+        <view class="option-item {{appearance.faceShape === 3 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="3">
+          <view class="shape-icon heart-shape"></view>
+          <text>瓜子脸</text>
+        </view>
+        <view class="option-item {{appearance.faceShape === 4 ? 'active' : ''}}" bindtap="setAppearance" data-key="faceShape" data-value="4">
+          <view class="shape-icon diamond-shape"></view>
+          <text>心形脸</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 眼睛 -->
+    <view class="option-section">
+      <text class="option-label">眼睛</text>
+      <view class="option-group">
+        <view class="option-item {{appearance.eyesType === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="eyesType" data-value="0">
+          <view class="eye-icon big-eye"></view>
+          <text>大圆眼</text>
+        </view>
+        <view class="option-item {{appearance.eyesType === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="eyesType" data-value="1">
+          <view class="eye-icon almond-eye"></view>
+          <text>弯弯眼</text>
+        </view>
+        <view class="option-item {{appearance.eyesType === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="eyesType" data-value="2">
+          <view class="eye-icon star-eye"></view>
+          <text>星星眼</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 嘴巴 -->
+    <view class="option-section">
+      <text class="option-label">嘴巴</text>
+      <view class="option-group">
+        <view class="option-item {{appearance.mouthType === 0 ? 'active' : ''}}" bindtap="setAppearance" data-key="mouthType" data-value="0">
+          <view class="mouth-icon smile-mouth"></view>
+          <text>微笑</text>
+        </view>
+        <view class="option-item {{appearance.mouthType === 1 ? 'active' : ''}}" bindtap="setAppearance" data-key="mouthType" data-value="1">
+          <view class="mouth-icon big-smile-mouth"></view>
+          <text>大笑</text>
+        </view>
+        <view class="option-item {{appearance.mouthType === 2 ? 'active' : ''}}" bindtap="setAppearance" data-key="mouthType" data-value="2">
+          <view class="mouth-icon small-mouth"></view>
+          <text>小嘴</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <button class="btn-next" bindtap="goToStep4">下一步</button>
+</view>
+
+<!-- 步骤4：输入玩家名字 -->
+<view class="container step-page" wx:if="{{step === 4}}">
+  <view class="step-header">
+    <text class="step-indicator">4 / 4</text>
+    <text class="step-title">输入你的名字</text>
+  </view>
+  <view class="name-input-section">
+    <view class="companion-preview-small">
+      <view class="avatar-body-small">
+        <view class="avatar-face-small face-{{appearance.faceShape}} skin-{{appearance.skinColor}}">
+          <view class="hair-small hair-small-{{appearance.hairStyle}}"></view>
+          <view class="eyes-small eyes-small-{{appearance.eyesType}}">
+            <view class="eye-small"></view>
+            <view class="eye-small"></view>
+          </view>
+          <view class="mouth-small mouth-small-{{appearance.mouthType}}"></view>
+        </view>
+      </view>
+      <text class="preview-name-small">你的伴侣：{{companionGender === 'male' ? '小明' : '小花'}}</text>
+    </view>
+    <view class="input-wrapper">
+      <input class="name-input" type="text" placeholder="请输入你的名字" placeholder-style="color: #999;" maxlength="10" bindinput="onNameInput" value="{{playerName}}" />
+    </view>
+    <text class="input-hint">名字将用于游戏中的对话和互动</text>
+  </view>
+  <button class="btn-start-game" bindtap="startGame" disabled="{{!playerName.trim()}}">开始游戏</button>
+</view>
